@@ -11,10 +11,10 @@ import (
 )
 
 var NoiseSpectrogramsCmd = &cobra.Command{
-	Use:   "noise-spectrograms",
+	Use:   "noise-spectrogram",
 	Short: "Retrieve Noise-Spectrogram plots (png) from IRIS MUSTANG 'noise-spectrograms' Web Service",
 	Run: func(cmd *cobra.Command, args []string) {
-		ProcessQuery("noise-spectrograms", args)
+		ProcessQuery("noise-spectrogram", args)
 	},
 }
 
@@ -95,7 +95,8 @@ func ProcessQuery(svcname string, args []string) {
 			for resptr := range results {
 
 				if len(resptr.Resbuf) > 0 {
-					pngFilename := fmt.Sprintf("%s/%s",
+					pngFilename := fmt.Sprintf("results/%s/%s/%s",
+						resptr.Req.Service,
 						strings.ToLower(resptr.Req.Sta),
 						resptr.Req.FileName())
 					err := resptr.SaveToFile(pngFilename)
