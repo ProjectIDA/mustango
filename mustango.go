@@ -7,5 +7,6 @@ import (
 
 func main() {
 	cmd.RootCmd.AddCommand(noise_spectrograms.NoiseSpectrogramsCmd)
+	//cmd.RootCmd.AddCommand(noise_mode_timeseries.NoiseModeTimeSeriesCmd)
 	cmd.Execute()
 }
