@@ -1,34 +1,16 @@
 package utils
 
-//type EndPointStruct struct {
-//	Name     string
-//	Function eprequest.EpFunction
-//}
-//
-//var EndPoints = []EndPointStruct{
-//	{Name: "noise-spectrogram", Function: mustang.Get},
-//}
-//
-//func getEndPointFunction(epname string) (eprequest.EpFunction, error) {
-//
-//	var epfunc eprequest.EpFunction = nil
-//	found := false
-//	for _, ep := range EndPoints{
-//		if ep.Name == epname {
-//			epfunc = ep.Function
-//			found = true
-//			break
-//		}
-//	}
-//	if !found {
-//		return epfunc, fmt.Errorf("unsupported endpoint name %s", epname)
-//	}
-//
-//	return epfunc, nil
-//}
+import "strings"
 
-//func IrisWSGet(req *eprequest.EPRequest) (*epresult.EPResult, error) {
-//
-//	resbuf, err := mustang.Get(req)
-//	return &epresult.EPResult{req, resbuf}, err
-//}
+func ProcessArgs(args []string) (string, string, string, string, string, string) {
+	networks := strings.ToUpper(args[0])
+	stations := strings.ToUpper(args[1])
+	locations := strings.ToUpper(args[2])
+	channels := strings.ToUpper(args[3])
+
+	startdate := ""
+	enddate := ""
+
+	return networks, stations, locations, channels, startdate, enddate
+}
+

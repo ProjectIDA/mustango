@@ -2,11 +2,10 @@ package main
 
 import (
 	"mustango/cmd"
-	"mustango/cmd/noise_spectrograms"
+	"mustango/cmd/noise_spectrogram"
 )
 
 func main() {
-	cmd.RootCmd.AddCommand(noise_spectrograms.NoiseSpectrogramsCmd)
-	//cmd.RootCmd.AddCommand(noise_mode_timeseries.NoiseModeTimeSeriesCmd)
+	cmd.RootCmd.AddCommand(noise_spectrogram.NoiseSpectrogramCmd)
 	cmd.Execute()
 }

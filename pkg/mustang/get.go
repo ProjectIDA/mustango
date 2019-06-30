@@ -1,6 +1,7 @@
 package mustang
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -11,6 +12,7 @@ type Urler interface {
 func Get(req Urler) (*http.Response, error) {
 
 	url, err := req.Url()
+	fmt.Printf("URL: %s\n", url)
 	if err != nil {
 		return &http.Response{}, err
 	}

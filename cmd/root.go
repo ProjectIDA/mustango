@@ -16,6 +16,9 @@ var RootCmd = &cobra.Command{
 	},
 }
 
+func init() {
+	RootCmd.PersistentFlags().StringP("outdir", "o", "./", "Output directory")
+}
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
