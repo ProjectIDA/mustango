@@ -185,6 +185,8 @@ func MakeRequests(requests []*Request, opts map[string]string, reschn chan *Resu
 
 		go makeRequest(&wg, request, reschn)
 
+		time.Sleep(ThrottleDelay)
+
 	}
 
 	go func(wg *sync.WaitGroup, results chan *Result) {
