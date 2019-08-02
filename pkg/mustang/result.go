@@ -30,15 +30,17 @@ func (resptr *Result) SaveToFile(fn string) (error) {
 	return err
 }
 
-func (r *Result) FileName() (filename string) {
+func (r *Result) FileName(name_tail string) (filename string) {
 
-	fn := fmt.Sprintf("%s.%s.%s.%s.%s.%s.%s",
+	if name_tail == "" {
+		name_tail = r.Req.Starttime + "." + r.Req.Endtime
+	}
+	fn := fmt.Sprintf("%s.%s.%s.%s.%s.%s",
 		r.Req.Net,
 		r.Req.Sta,
 		r.Req.Loc,
 		r.Req.Chn,
-		r.Req.Starttime,
-		r.Req.Endtime,
+		name_tail,
 		r.FormatFileExt())
 
 	return fn

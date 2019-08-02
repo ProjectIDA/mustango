@@ -14,9 +14,9 @@ import (
 )
 
 var NoiseSpectrogramCmd = &cobra.Command{
-	Version: "0.9.0",
-	Use:   "noise-spectrogram net sta loclist chnlist",
-	Short: "BLAH BLAH SHIERT DESCR", ///cmdName + "net sta loclist chanlist"
+	Version: "0.9.1",
+	Use:   "noise-spectrogram net sta loclist chnlist name_tail",
+	Short: "Retrieve noise spectrograms from IRIS MUSTANG for the specified net, sta, chnlist and loclist.", ///cmdName + "net sta loclist chanlist"
 	Long:  `
 Retrieve Noise-Spectrogram plots from the IRIS MUSTANG 'noise-spectrogram' Web Service.
 
@@ -30,6 +30,7 @@ for more information on all options of the options available for this service`,
 }
 
 func init() {
+	NoiseSpectrogramCmd.Flags().String("name-tail", "", "tail of output image file name")
 	NoiseSpectrogramCmd.Flags().String("format", "plot", "Output format: 'plot'")
 	NoiseSpectrogramCmd.Flags().String("output", "power", "Plot output ['power'|'powerdhnm'|'powerdlnm'|'powerdnm'|'powerdmedian']")
 	NoiseSpectrogramCmd.Flags().String("plot.height", "", "Height in pixels (default '1000').\nNote: If only Height or Width specified, the other scales proportionately.")
@@ -169,6 +170,8 @@ func processCmd(cc *cobra.Command, svcname, apiversion string, args []string) {
 	beginDate := fmt.Sprintf("%4d-%02d-%02d", startY, startM, startD)
 	endDate := fmt.Sprintf("%4d-%02d-%02d", endY, endM, endD)
 
+	nameTail, _ := cc.Flags().GetString("name-tail")
+
 	opts := map[string]string{}
 	processFlags(cc, opts)
 
@@ -194,7 +197,7 @@ func processCmd(cc *cobra.Command, svcname, apiversion string, args []string) {
 		filename := filepath.Join(
 			outdir,
 			strings.ToLower(result.Req.Sta),
-			result.FileName())
+			result.FileName(nameTail))
 		err := result.SaveToFile(filename)
 		if err != nil {
 			fmt.Printf("Error saving image to %s: %s\n", filename, err)
